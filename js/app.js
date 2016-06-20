@@ -1,7 +1,7 @@
 // Enemies our player must avoid
 var Enemy = function() {
-    this.yPos = [65, 145, 225];
-    this.enemySpeed = [100, 150, 200, 250, 300, 400, 600, 800, 900, 1400];
+    this.enemyPosY = [65, 145, 225, 300];
+    this.enemySpeed = [300, 1000];
     this.sprite = 'images/enemy-bug.png';
     this.reset();
 };
@@ -28,11 +28,13 @@ Enemy.prototype.render = function() {
 };
 
 Enemy.prototype.getLocationY = function() {
-    return this.yPos[Math.floor(Math.random() * this.possibleY.length)];
+    return this.enemyPosY[Math.floor(Math.random() * this.enemyPosY.length)];
 };
 
 Enemy.prototype.getRandomSpeed = function() {
-    return Math.floor(Math.random() * 9);
+     var minSpeed = this.enemySpeed[0],
+         maxSpeed = this.enemySpeed[1];
+    return Math.floor(Math.random() * (maxSpeed - minSpeed)) + minSpeed;
 };
 
 var Player = function() {
